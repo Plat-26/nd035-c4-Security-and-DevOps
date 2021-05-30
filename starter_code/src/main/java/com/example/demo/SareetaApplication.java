@@ -7,8 +7,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories("com.example.demo.model.persistence.repositories")
 @EntityScan("com.example.demo.model.persistence")
-@SpringBootApplication
+@SpringBootApplication(exculde = {SecurityAutoConfiguration.class})
 public class SareetaApplication {
+
+	@Bean
+	public BCryptPasswordEncorder bCryptPasswordEncorder() {
+		return new BCryptPasswordEncoder();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SareetaApplication.class, args);

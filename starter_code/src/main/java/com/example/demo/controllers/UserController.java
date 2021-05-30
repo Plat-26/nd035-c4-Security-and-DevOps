@@ -21,6 +21,9 @@ import com.example.demo.model.requests.CreateUserRequest;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -46,8 +49,23 @@ public class UserController {
 		Cart cart = new Cart();
 		cartRepository.save(cart);
 		user.setCart(cart);
+		if(createUserRequest.getPassword().lenght() < 7 ||
+			!createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())) {
+			log.error("Error with user password. Cannot create user{}", createUserRequest.getUsername());
+			return ResponseEntity.badRequest().build();
+		}
+
+		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword(). ));
+
 		userRepository.save(user);
 		return ResponseEntity.ok(user);
+	}
+
+	private byte[] createSalt() {
+		SecureRandom random = new SecureRandom();
+		byte[] salt = new byte[16];
+		random.nextByte(salt);
+		return salt;
 	}
 	
 }

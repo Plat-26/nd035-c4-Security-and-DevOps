@@ -55,17 +55,12 @@ public class UserController {
 			return ResponseEntity.badRequest().build();
 		}
 
-		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword(). ));
-
+		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
 		userRepository.save(user);
 		return ResponseEntity.ok(user);
 	}
 
-	private byte[] createSalt() {
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[16];
-		random.nextByte(salt);
-		return salt;
-	}
+	///todo:Append salted password to raw password and add and save salt field to user entity
+
 	
 }

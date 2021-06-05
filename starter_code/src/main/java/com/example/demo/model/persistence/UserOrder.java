@@ -42,6 +42,15 @@ public class UserOrder {
 	@Column
 	private BigDecimal total;
 
+	public UserOrder() {
+	}
+
+	//convenience constructor
+	public UserOrder(Long id, List<Item> items) {
+		this.id = id;
+		this.items = items;
+	}
+
 	public Long getId() {
 		return id;
 	}

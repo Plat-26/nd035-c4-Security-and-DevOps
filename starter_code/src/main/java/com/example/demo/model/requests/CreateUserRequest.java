@@ -10,7 +10,7 @@ public class CreateUserRequest {
 	@JsonProperty
 	private String password;
 
-	@JsomProperty
+	@JsonProperty
 	private String confirmPassword;
 
 	public String getUsername() {

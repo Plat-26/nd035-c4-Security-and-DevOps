@@ -27,7 +27,7 @@ public class User {
 	@JsonProperty
 	private String username;
 
-	@JsonProperty(access = Access.WRITE_ONLY)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Column(nullable = false)
 	private String password;
 
@@ -59,7 +59,13 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
-	
+
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }
